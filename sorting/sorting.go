@@ -22,46 +22,22 @@ type IsLess func(v1, v2 []float64) bool
 //
 // First the x coordinates are compared.
 // if x coords are equal then the y coords are compared
-func IsLess2D(v1, v2 []float64) bool {
-	if v1[0] < v2[0] {
-		return true
-	}
-	if v1[0] > v2[0] {
-		return false
-	}
-	if v1[1] < v2[1] {
-		return true
-	}
-
-	return false
-}
+func IsLess2D(v1, v2 []float64) bool { _ = "STUB: not implemented"; return false }
 
 // NewFlatCoordSorting2D creates a Compare2D based sort.Interface implementation
 func NewFlatCoordSorting2D(layout geom.Layout, coordData []float64) FlatCoord {
-	return NewFlatCoordSorting(layout, coordData, IsLess2D)
+	_ = "STUB: not implemented"
+	return *new(FlatCoord)
 }
 
 // NewFlatCoordSorting creates a sort.Interface implementation based on the Comparator function
 func NewFlatCoordSorting(layout geom.Layout, coordData []float64, comparator IsLess) FlatCoord {
-	return FlatCoord{
-		isLess: comparator,
-		coords: coordData,
-		layout: layout,
-		stride: layout.Stride(),
-	}
+	_ = "STUB: not implemented"
+	return *new(FlatCoord)
 }
 
-func (s FlatCoord) Len() int {
-	return len(s.coords) / s.stride
-}
+func (s FlatCoord) Len() int { _ = "STUB: not implemented"; return 0 }
 
-func (s FlatCoord) Swap(i, j int) {
-	for k := range s.stride {
-		s.coords[i*s.stride+k], s.coords[j*s.stride+k] = s.coords[j*s.stride+k], s.coords[i*s.stride+k]
-	}
-}
+func (s FlatCoord) Swap(i, j int) { _ = "STUB: not implemented"; return }
 
-func (s FlatCoord) Less(i, j int) bool {
-	is, js := i*s.stride, j*s.stride
-	return s.isLess(s.coords[is:is+s.stride], s.coords[js:js+s.stride])
-}
+func (s FlatCoord) Less(i, j int) bool { _ = "STUB: not implemented"; return false }

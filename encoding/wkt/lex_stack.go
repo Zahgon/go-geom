@@ -1,8 +1,6 @@
 package wkt
 
 import (
-	"fmt"
-
 	"github.com/twpayne/go-geom"
 )
 
@@ -25,104 +23,62 @@ type layoutStack struct {
 }
 
 // makeLayoutStack returns a newly created layoutStack. An initial frame is pushed for the top level context.
-func makeLayoutStack() layoutStack {
-	return layoutStack{
-		data: []layoutStackObj{{layout: geom.NoLayout, inBaseTypeCollection: true}},
-	}
-}
+func makeLayoutStack() layoutStack { _ = "STUB: not implemented"; return *new(layoutStack) }
 
 // push constructs a layoutStackObj for a layout and pushes it onto the layout stack.
 func (s *layoutStack) push(layout geom.Layout) {
+	_ = "STUB: not implemented"
 	// inBaseTypeCollection inherits from outer context.
-	stackObj := layoutStackObj{
-		layout:               layout,
-		inBaseTypeCollection: s.topInBaseTypeCollection(),
-	}
-
-	switch layout {
-	case geom.NoLayout:
-		stackObj.layout = s.topLayout()
-	case geom.XYM, geom.XYZ, geom.XYZM:
-		stackObj.inBaseTypeCollection = false
-	default:
-		// This should never happen.
-		panic(fmt.Sprintf("unknown geom.Layout %d", layout))
-	}
-
-	s.data = append(s.data, stackObj)
+	return
 }
+
+// This should never happen.
 
 // pop pops a layoutStackObj from the layout stack and returns its layout.
-func (s *layoutStack) pop() geom.Layout {
-	s.assertNotEmpty()
-	if s.atTopLevel() {
-		panic("top level stack frame should never be popped")
-	}
-	curTopLayout := s.topLayout()
-	s.data = s.data[:len(s.data)-1]
-	return curTopLayout
-}
+func (s *layoutStack) pop() geom.Layout { _ = "STUB: not implemented"; return *new(geom.Layout) }
 
 // top returns a pointer to the layoutStackObj currently at the top of the stack.
-func (s *layoutStack) top() *layoutStackObj {
-	s.assertNotEmpty()
-	return &s.data[len(s.data)-1]
-}
+func (s *layoutStack) top() *layoutStackObj { _ = "STUB: not implemented"; return nil }
 
 // topLayout returns the layout field of the topmost layoutStackObj.
 func (s *layoutStack) topLayout() geom.Layout {
-	return s.top().layout
+	_ = "STUB: not implemented"
+	return *
+
+	// topLayout returns the inBaseTypeCollection field of the topmost layoutStackObj.
+	new(geom.Layout)
 }
 
-// topLayout returns the inBaseTypeCollection field of the topmost layoutStackObj.
-func (s *layoutStack) topInBaseTypeCollection() bool {
-	return s.top().inBaseTypeCollection
-}
+func (s *layoutStack) topInBaseTypeCollection() bool { _ = "STUB: not implemented"; return false }
 
 // topLayout returns the nextPointMustBeEmpty field of the topmost layoutStackObj.
-func (s *layoutStack) topNextPointMustBeEmpty() bool {
-	return s.top().nextPointMustBeEmpty
-}
+func (s *layoutStack) topNextPointMustBeEmpty() bool { _ = "STUB: not implemented"; return false }
 
 // setTopLayout sets the layout field of the topmost layoutStackObj.
-func (s *layoutStack) setTopLayout(layout geom.Layout) {
-	switch layout {
-	case geom.XY, geom.XYM, geom.XYZ, geom.XYZM:
-		s.top().layout = layout
-	case geom.NoLayout:
-		panic("setTopLayout should not be called with geom.NoLayout")
-	default:
-		// This should never happen.
-		panic(fmt.Sprintf("unknown geom.Layout %d", layout))
-	}
-}
+func (s *layoutStack) setTopLayout(layout geom.Layout) { _ = "STUB: not implemented"; return }
+
+// This should never happen.
 
 // setTopNextPointMustBeEmpty sets the nextPointMustBeEmpty field of the topmost layoutStackObj.
 func (s *layoutStack) setTopNextPointMustBeEmpty(nextPointMustBeEmpty bool) {
-	if s.topLayout() != geom.XYM {
-		panic("setTopNextPointMustBeEmpty called for non-XYM geometry collection")
-	}
-	s.top().nextPointMustBeEmpty = nextPointMustBeEmpty
+	_ = "STUB: not implemented"
+	return
 }
 
 // assertNotEmpty checks that the stack is not empty and panics if it is.
 func (s *layoutStack) assertNotEmpty() {
+	_ = "STUB: not implemented"
 	// Layout stack should never be empty.
-	if len(s.data) == 0 {
-		panic("layout stack is empty")
-	}
+	return
 }
 
 // assertNoGeometryCollectionFramesLeft checks that no frames corresponding to geometrycollections are left on the stack.
 func (s *layoutStack) assertNoGeometryCollectionFramesLeft() {
+	_ = "STUB: not implemented"
 	// The initial stack frame should be the only one remaining at the end.
-	if !s.atTopLevel() {
-		panic("layout stack still has geometrycollection frames")
-	}
+	return
 }
 
 // atTopLevel returns whether or not the stack has only the first frame which represents that we are currently
 // not inside a geometrycollection.
-func (s *layoutStack) atTopLevel() bool {
-	return len(s.data) == 1
-}
+func (s *layoutStack) atTopLevel() bool { _ = "STUB: not implemented"; return false }

@@ -1,7 +1,5 @@
 package location
 
-import "fmt"
-
 // Type enumerates the different topological locations which can occur in a {@link Geometry}.
 // The constants are also used as the row and column indices of DE-9IM {@link IntersectionMatrix}es.
 type Type int
@@ -23,34 +21,9 @@ const (
 	None
 )
 
-func (t Type) String() string {
-	switch t {
-	case Exterior:
-		return "Exterior"
-	case Boundary:
-		return "Boundary"
-	case Interior:
-		return "Interior"
-	case None:
-		return "None"
-	}
-
-	panic(fmt.Sprintf("Unknown location value: %v", int(t)))
-}
+func (t Type) String() string { _ = "STUB: not implemented"; return "" }
 
 // Symbol converts the location value to a location symbol, for example, Exterior => 'e'
 // locationValue
 // Returns either 'e', 'b', 'i' or '-'
-func (t Type) Symbol() rune {
-	switch t {
-	case Exterior:
-		return 'e'
-	case Boundary:
-		return 'b'
-	case Interior:
-		return 'i'
-	case None:
-		return '-'
-	}
-	panic(fmt.Sprintf("Unknown location value: %v", int(t)))
-}
+func (t Type) Symbol() rune { _ = "STUB: not implemented"; return 0 }

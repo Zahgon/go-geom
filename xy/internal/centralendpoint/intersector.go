@@ -1,10 +1,7 @@
 package centralendpoint
 
 import (
-	"math"
-
 	geom "github.com/twpayne/go-geom"
-	"github.com/twpayne/go-geom/xy/internal"
 )
 
 // GetIntersection computes an approximate intersection of two line segments by taking the most central of the endpoints of the segments.
@@ -16,51 +13,21 @@ import (
 // Also, by always returning one of the input points, this should result  in reducing segment fragmentation.
 // Intended to be used as a last resort for  computing ill-conditioned intersection situations which cause other methods to fail.
 func GetIntersection(line1End1, line1End2, line2End1, line2End2 geom.Coord) geom.Coord {
-	intersector := centralEndpointIntersector{
-		line1End1: line1End1,
-		line1End2: line1End2,
-		line2End1: line2End1,
-		line2End2: line2End2,
-	}
-	intersector.compute()
-	return intersector.intersectionPoint
+	_ = "STUB: not implemented"
+	return *new(geom.Coord)
 }
 
 type centralEndpointIntersector struct {
 	line1End1, line1End2, line2End1, line2End2, intersectionPoint geom.Coord
 }
 
-func (intersector *centralEndpointIntersector) compute() {
-	pts := [4]geom.Coord{intersector.line1End1, intersector.line1End2, intersector.line2End1, intersector.line2End2}
-	centroid := average(pts)
-	intersector.intersectionPoint = findNearestPoint(centroid, pts)
-}
+func (intersector *centralEndpointIntersector) compute() { _ = "STUB: not implemented"; return }
 
-func average(pts [4]geom.Coord) geom.Coord {
-	avg := geom.Coord{0, 0}
-
-	for i := range pts {
-		avg[0] += pts[i][0]
-		avg[1] += pts[i][1]
-	}
-	if n := float64(len(pts)); n > 0 {
-		avg[0] /= n
-		avg[1] /= n
-	}
-	return avg
-}
+func average(pts [4]geom.Coord) geom.Coord { _ = "STUB: not implemented"; return *new(geom.Coord) }
 
 func findNearestPoint(p geom.Coord, pts [4]geom.Coord) geom.Coord {
-	minDist := math.MaxFloat64
-	result := geom.Coord{}
-	for i := range pts {
-		dist := internal.Distance2D(p, pts[i])
-
-		// always initialize the result
-		if i == 0 || dist < minDist {
-			minDist = dist
-			result = pts[i]
-		}
-	}
-	return result
+	_ = "STUB: not implemented"
+	return *new(geom.Coord)
 }
+
+// always initialize the result

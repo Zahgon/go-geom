@@ -1,7 +1,5 @@
 package orientation
 
-import "fmt"
-
 // Type enumerates the angular relationship between points and vectors.
 type Type int
 
@@ -16,9 +14,4 @@ const (
 
 var orientationLabels = [3]string{"Clockwise", "Collinear", "CounterClockwise"}
 
-func (o Type) String() string {
-	if o > 1 || o < -1 {
-		return fmt.Sprintf("Unsafe to calculate: %v", int(o))
-	}
-	return orientationLabels[int(o+1)]
-}
+func (o Type) String() string { _ = "STUB: not implemented"; return "" }

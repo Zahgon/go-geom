@@ -21,16 +21,12 @@ type WKBOption func(WKBParams) WKBParams
 
 // WKBOptionEmptyPointHandling sets the params to the specified EmptyPointHandling.
 func WKBOptionEmptyPointHandling(h EmptyPointHandling) WKBOption {
-	return func(p WKBParams) WKBParams {
-		p.EmptyPointHandling = h
-		return p
-	}
+	_ = "STUB: not implemented"
+	return *new(WKBOption)
 }
 
 // InitWKBParams initializes WKBParams from an initial parameter and some options.
 func InitWKBParams(params WKBParams, opts ...WKBOption) WKBParams {
-	for _, opt := range opts {
-		params = opt(params)
-	}
-	return params
+	_ = "STUB: not implemented"
+	return *new(WKBParams)
 }

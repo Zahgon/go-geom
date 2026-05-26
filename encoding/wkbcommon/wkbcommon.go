@@ -3,7 +3,6 @@ package wkbcommon
 
 import (
 	"encoding/binary"
-	"fmt"
 	"io"
 )
 
@@ -22,16 +21,12 @@ var (
 // An ErrUnknownByteOrder is returned when an unknown byte order is encountered.
 type ErrUnknownByteOrder byte
 
-func (e ErrUnknownByteOrder) Error() string {
-	return fmt.Sprintf("wkb: unknown byte order: %b", byte(e))
-}
+func (e ErrUnknownByteOrder) Error() string { _ = "STUB: not implemented"; return "" }
 
 // An ErrUnsupportedByteOrder is returned when an unsupported byte order is encountered.
 type ErrUnsupportedByteOrder struct{}
 
-func (e ErrUnsupportedByteOrder) Error() string {
-	return "wkb: unsupported byte order"
-}
+func (e ErrUnsupportedByteOrder) Error() string { _ = "STUB: not implemented"; return "" }
 
 // A Type is a WKB code.
 type Type uint32
@@ -39,16 +34,12 @@ type Type uint32
 // An ErrUnknownType is returned when an unknown type is encountered.
 type ErrUnknownType Type
 
-func (e ErrUnknownType) Error() string {
-	return fmt.Sprintf("wkb: unknown type: %d", uint(e))
-}
+func (e ErrUnknownType) Error() string { _ = "STUB: not implemented"; return "" }
 
 // An ErrUnsupportedType is returned when an unsupported type is encountered.
 type ErrUnsupportedType Type
 
-func (e ErrUnsupportedType) Error() string {
-	return fmt.Sprintf("wkb: unsupported type: %d", uint(e))
-}
+func (e ErrUnsupportedType) Error() string { _ = "STUB: not implemented"; return "" }
 
 // An ErrUnexpectedType is returned when an unexpected type is encountered.
 type ErrUnexpectedType struct {
@@ -56,9 +47,7 @@ type ErrUnexpectedType struct {
 	Want any
 }
 
-func (e ErrUnexpectedType) Error() string {
-	return fmt.Sprintf("wkb: got %T, want %T", e.Got, e.Want)
-}
+func (e ErrUnexpectedType) Error() string { _ = "STUB: not implemented"; return "" }
 
 // MaxGeometryElements is the maximum number of elements that will be decoded
 // at different levels. Its primary purpose is to prevent corrupt inputs from
@@ -85,9 +74,7 @@ type ErrGeometryTooLarge struct {
 	Limit int
 }
 
-func (e ErrGeometryTooLarge) Error() string {
-	return fmt.Sprintf("wkb: number of elements at level %d (%d) exceeds %d", e.Level, e.N, e.Limit)
-}
+func (e ErrGeometryTooLarge) Error() string { _ = "STUB: not implemented"; return "" }
 
 // Geometry type IDs.
 const (
@@ -105,75 +92,36 @@ const (
 
 // ReadFlatCoords0 reads flat coordinates 0.
 func ReadFlatCoords0(r io.Reader, byteOrder binary.ByteOrder, stride int) ([]float64, error) {
-	coord := make([]float64, stride)
-	if err := ReadFloatArray(r, byteOrder, coord); err != nil {
-		return nil, err
-	}
-	return coord, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadFlatCoords1 reads flat coordinates 1.
 func ReadFlatCoords1(r io.Reader, byteOrder binary.ByteOrder, stride int) ([]float64, error) {
-	n, err := ReadUInt32(r, byteOrder)
-	if err != nil {
-		return nil, err
-	}
-	if limit := MaxGeometryElements[1]; limit >= 0 && int(n) > limit {
-		return nil, ErrGeometryTooLarge{Level: 1, N: int(n), Limit: limit}
-	}
-	flatCoords := make([]float64, int(n)*stride)
-	if err := ReadFloatArray(r, byteOrder, flatCoords); err != nil {
-		return nil, err
-	}
-	return flatCoords, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // ReadFlatCoords2 reads flat coordinates 2.
 func ReadFlatCoords2(r io.Reader, byteOrder binary.ByteOrder, stride int) ([]float64, []int, error) {
-	n, err := ReadUInt32(r, byteOrder)
-	if err != nil {
-		return nil, nil, err
-	}
-	if limit := MaxGeometryElements[2]; limit >= 0 && int(n) > limit {
-		return nil, nil, ErrGeometryTooLarge{Level: 2, N: int(n), Limit: limit}
-	}
-	var flatCoordss []float64
-	ends := make([]int, n)
-	for i := range n {
-		flatCoords, err := ReadFlatCoords1(r, byteOrder, stride)
-		if err != nil {
-			return nil, nil, err
-		}
-		flatCoordss = append(flatCoordss, flatCoords...)
-		ends[i] = len(flatCoordss)
-	}
-	return flatCoordss, ends, nil
+	_ = "STUB: not implemented"
+	return nil, nil, nil
 }
 
 // WriteFlatCoords0 writes flat coordinates 0.
 func WriteFlatCoords0(w io.Writer, byteOrder binary.ByteOrder, coord []float64) error {
-	return WriteFloatArray(w, byteOrder, coord)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // WriteFlatCoords1 writes flat coordinates 1.
 func WriteFlatCoords1(w io.Writer, byteOrder binary.ByteOrder, coords []float64, stride int) error {
-	if err := WriteUInt32(w, byteOrder, uint32(len(coords)/stride)); err != nil {
-		return err
-	}
-	return WriteFloatArray(w, byteOrder, coords)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // WriteFlatCoords2 writes flat coordinates 2.
 func WriteFlatCoords2(w io.Writer, byteOrder binary.ByteOrder, flatCoords []float64, ends []int, stride int) error {
-	if err := WriteUInt32(w, byteOrder, uint32(len(ends))); err != nil {
-		return err
-	}
-	offset := 0
-	for _, end := range ends {
-		if err := WriteFlatCoords1(w, byteOrder, flatCoords[offset:end], stride); err != nil {
-			return err
-		}
-		offset = end
-	}
+	_ = "STUB: not implemented"
 	return nil
 }

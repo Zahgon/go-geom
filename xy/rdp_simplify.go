@@ -32,95 +32,19 @@ package xy
 // Threshold is the distance between a point and the selected start and end line
 // segment. It returns the indexes of the points.
 func SimplifyFlatCoords(flatCoords []float64, threshold float64, stride int) []int {
-	size := len(flatCoords) / stride
-	if size < 3 {
-		ret := make([]int, size)
-		for i := range size {
-			ret[i] = i
-		}
-		return ret
-	}
-	mask := make([]byte, size)
-	// first and last always added
-	mask[0] = 1
-	mask[len(mask)-1] = 1
-
-	found := dpWorker(flatCoords, threshold, mask, stride)
-	indexMap := make([]int, 0, found)
-
-	for i, v := range mask {
-		if v == 1 {
-			indexMap = append(indexMap, i)
-		}
-	}
-
-	return indexMap
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// first and last always added
 
 // dpWorker does the recursive threshold checks.
 // Using a stack array with a stackLength variable resulted in
 // 4x speed improvement over calling the function recursively.
 func dpWorker(ls []float64, threshold float64, mask []byte, stride int) int {
-	found := 2
-
-	var stack []int
-	stack = append(stack, 0, len(ls)/stride-1)
-
-	l := len(stack)
-	for l > 0 {
-		start := stack[l-2]
-		end := stack[l-1]
-
-		maxDist := 0.0
-		maxIndex := 0
-		a := ls[start*stride : start*stride+stride]
-		b := ls[end*stride : end*stride+stride]
-
-		for i := start + 1; i < end; i++ {
-			p := ls[i*stride : i*stride+stride]
-			dist := distanceFromSegmentSquared(a, b, p)
-			if dist > maxDist {
-				maxDist = dist
-				maxIndex = i
-			}
-		}
-
-		if maxDist > threshold*threshold {
-			found++
-			mask[maxIndex] = 1
-
-			stack[l-1] = maxIndex
-			stack = append(stack, maxIndex, end)
-		} else {
-			stack = stack[:l-2]
-		}
-		l = len(stack)
-	}
-
-	return found
+	_ = "STUB: not implemented"
+	return 0
 }
 
 // distanceFromSegmentSquared returns point's squared distance from the segment [a, b].
-func distanceFromSegmentSquared(a, b, point []float64) float64 {
-	x := a[0]
-	y := a[1]
-	dx := b[0] - x
-	dy := b[1] - y
-
-	if dx != 0 || dy != 0 {
-		t := ((point[0]-x)*dx + (point[1]-y)*dy) / (dx*dx + dy*dy)
-
-		if t > 1 {
-			x = b[0]
-			y = b[1]
-		} else if t > 0 {
-			x += dx * t
-			y += dy * t
-		}
-	}
-
-	dx = point[0] - x
-	dy = point[1] - y
-
-	return dx*dx + dy*dy
-}
+func distanceFromSegmentSquared(a, b, point []float64) float64 { _ = "STUB: not implemented"; return 0 }

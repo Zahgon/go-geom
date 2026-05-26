@@ -4,7 +4,6 @@ package wkbhex
 
 import (
 	"encoding/binary"
-	"encoding/hex"
 
 	"github.com/twpayne/go-geom"
 	"github.com/twpayne/go-geom/encoding/wkb"
@@ -20,18 +19,12 @@ var (
 
 // Encode encodes an arbitrary geometry to a string.
 func Encode(g geom.T, byteOrder binary.ByteOrder, opts ...wkbcommon.WKBOption) (string, error) {
-	wkb, err := wkb.Marshal(g, byteOrder, opts...)
-	if err != nil {
-		return "", err
-	}
-	return hex.EncodeToString(wkb), nil
+	_ = "STUB: not implemented"
+	return "", nil
 }
 
 // Decode decodes an arbitrary geometry from a string.
 func Decode(s string, opts ...wkbcommon.WKBOption) (geom.T, error) {
-	data, err := hex.DecodeString(s)
-	if err != nil {
-		return nil, err
-	}
-	return wkb.Unmarshal(data, opts...)
+	_ = "STUB: not implemented"
+	return *new(geom.T), nil
 }

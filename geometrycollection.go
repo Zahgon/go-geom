@@ -9,161 +9,87 @@ type GeometryCollection struct {
 }
 
 // NewGeometryCollection returns a new empty GeometryCollection.
-func NewGeometryCollection() *GeometryCollection {
-	return &GeometryCollection{}
-}
+func NewGeometryCollection() *GeometryCollection { _ = "STUB: not implemented"; return nil }
 
 // Geom returns the ith geometry in g.
 func (g *GeometryCollection) Geom(i int) T {
-	return g.geoms[i]
+	_ = "STUB: not implemented"
+
+	// Geoms returns the geometries in g.
+	return *new(T)
 }
 
-// Geoms returns the geometries in g.
 func (g *GeometryCollection) Geoms() []T {
-	return g.geoms
+	_ = "STUB: not implemented"
+
+	// Layout returns the smallest layout that covers all of the layouts in g's
+	// geometries.
+	return nil
 }
 
-// Layout returns the smallest layout that covers all of the layouts in g's
-// geometries.
-func (g *GeometryCollection) Layout() Layout {
-	if g.layout != NoLayout {
-		return g.layout
-	}
-	maxLayout := NoLayout
-	for _, g := range g.geoms {
-		switch l := g.Layout(); l {
-		case XYZ:
-			if maxLayout == XYM {
-				maxLayout = XYZM
-			} else if l > maxLayout {
-				maxLayout = l
-			}
-		case XYM:
-			if maxLayout == XYZ {
-				maxLayout = XYZM
-			} else if l > maxLayout {
-				maxLayout = l
-			}
-		default:
-			if l > maxLayout {
-				maxLayout = l
-			}
-		}
-	}
-	return maxLayout
-}
+func (g *GeometryCollection) Layout() Layout { _ = "STUB: not implemented"; return *new(Layout) }
 
 // NumGeoms returns the number of geometries in g.
-func (g *GeometryCollection) NumGeoms() int {
-	return len(g.geoms)
-}
+func (g *GeometryCollection) NumGeoms() int { _ = "STUB: not implemented"; return 0 }
 
 // Stride returns the stride of g's layout.
-func (g *GeometryCollection) Stride() int {
-	return g.Layout().Stride()
-}
+func (g *GeometryCollection) Stride() int { _ = "STUB: not implemented"; return 0 }
 
 // Bounds returns the bounds of all the geometries in g.
 func (g *GeometryCollection) Bounds() *Bounds {
+	_ = "STUB: not implemented"
 	// FIXME this needs work for mixing layouts, e.g. XYZ and XYM
-	b := NewBounds(g.Layout())
-	for _, g := range g.geoms {
-		b = b.Extend(g)
-	}
-	return b
+	return nil
 }
 
 // Empty returns true if the collection is empty.
 // This can return true if the GeometryCollection contains multiple Geometry objects
 // which are all empty.
-func (g *GeometryCollection) Empty() bool {
-	for _, g := range g.geoms {
-		if !g.Empty() {
-			return false
-		}
-	}
-	return true
-}
+func (g *GeometryCollection) Empty() bool { _ = "STUB: not implemented"; return false }
 
 // FlatCoords panics.
-func (g *GeometryCollection) FlatCoords() []float64 {
-	panic("FlatCoords() called on a GeometryCollection")
-}
+func (g *GeometryCollection) FlatCoords() []float64 { _ = "STUB: not implemented"; return nil }
 
 // Ends panics.
-func (g *GeometryCollection) Ends() []int {
-	panic("Ends() called on a GeometryCollection")
-}
+func (g *GeometryCollection) Ends() []int { _ = "STUB: not implemented"; return nil }
 
 // Endss panics.
-func (g *GeometryCollection) Endss() [][]int {
-	panic("Endss() called on a GeometryCollection")
-}
+func (g *GeometryCollection) Endss() [][]int { _ = "STUB: not implemented"; return nil }
 
 // SRID returns g's SRID.
 func (g *GeometryCollection) SRID() int {
-	return g.srid
+	_ = "STUB: not implemented"
+
+	// MustPush pushes gs to g. It panics on any error.
+	return 0
 }
 
-// MustPush pushes gs to g. It panics on any error.
 func (g *GeometryCollection) MustPush(gs ...T) *GeometryCollection {
-	if err := g.Push(gs...); err != nil {
-		panic(err)
-	}
-	return g
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // CheckLayout checks all geometries in the collection match the given
 // layout.
 func (g *GeometryCollection) CheckLayout(layout Layout) error {
-	if layout != NoLayout {
-		for _, geom := range g.geoms {
-			if geomLayout := geom.Layout(); geomLayout != layout {
-				return ErrLayoutMismatch{
-					Got:  layout,
-					Want: geomLayout,
-				}
-			}
-		}
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // MustSetLayout sets g's layout. It panics on any error.
 func (g *GeometryCollection) MustSetLayout(layout Layout) *GeometryCollection {
-	if err := g.SetLayout(layout); err != nil {
-		panic(err)
-	}
-	return g
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Push appends geometries.
-func (g *GeometryCollection) Push(gs ...T) error {
-	if g.layout != NoLayout {
-		for _, geom := range gs {
-			if geomLayout := geom.Layout(); geomLayout != g.layout {
-				return ErrLayoutMismatch{
-					Got:  geomLayout,
-					Want: g.layout,
-				}
-			}
-		}
-	}
-	g.geoms = append(g.geoms, gs...)
-	return nil
-}
+func (g *GeometryCollection) Push(gs ...T) error { _ = "STUB: not implemented"; return nil }
 
 // SetLayout sets g's layout.
-func (g *GeometryCollection) SetLayout(layout Layout) error {
-	if err := g.CheckLayout(layout); err != nil {
-		return err
-	}
-	g.layout = layout
-	return nil
-}
+func (g *GeometryCollection) SetLayout(layout Layout) error { _ = "STUB: not implemented"; return nil }
 
 // SetSRID sets g's SRID and the SRID of all its elements.
 func (g *GeometryCollection) SetSRID(srid int) *GeometryCollection {
-	g.srid = srid
-	return g
+	_ = "STUB: not implemented"
+	return nil
 }

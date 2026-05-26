@@ -13,35 +13,19 @@ type CoordStack struct {
 }
 
 // NewCoordStack creates a new stack with the stride indicated in the layout
-func NewCoordStack(layout geom.Layout) *CoordStack {
-	return &CoordStack{stride: layout.Stride()}
-}
+func NewCoordStack(layout geom.Layout) *CoordStack { _ = "STUB: not implemented"; return nil }
 
 // Push puts the coordinate at the location idx onto the stack.
 func (stack *CoordStack) Push(data []float64, idx int) []float64 {
-	c := data[idx : idx+stack.stride]
-	stack.Data = append(stack.Data, c...)
-	return c
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Pop the last pushed coordinate off the stack and return the coordinate
-func (stack *CoordStack) Pop() ([]float64, int) {
-	numOrds := len(stack.Data)
-	start := numOrds - stack.stride
-	coord := stack.Data[start:numOrds]
-	stack.Data = stack.Data[:start]
-	return coord, stack.Size()
-}
+func (stack *CoordStack) Pop() ([]float64, int) { _ = "STUB: not implemented"; return nil, 0 }
 
 // Peek returns the most recently pushed coord without modifying the stack
-func (stack *CoordStack) Peek() []float64 {
-	numOrds := len(stack.Data)
-	start := numOrds - stack.stride
-	coord := stack.Data[start:numOrds]
-	return coord
-}
+func (stack *CoordStack) Peek() []float64 { _ = "STUB: not implemented"; return nil }
 
 // Size returns the number of coordinates in the stack
-func (stack *CoordStack) Size() int {
-	return len(stack.Data) / stack.stride
-}
+func (stack *CoordStack) Size() int { _ = "STUB: not implemented"; return 0 }

@@ -35,37 +35,22 @@ type Encoder struct {
 }
 
 // NewEncoder returns a new encoder with the given options set.
-func NewEncoder(applyOptFns ...EncodeOption) *Encoder {
-	encoder := &Encoder{
-		maxDecimalDigits: -1,
-	}
-	for _, applyOptFn := range applyOptFns {
-		applyOptFn(encoder)
-	}
-	return encoder
-}
+func NewEncoder(applyOptFns ...EncodeOption) *Encoder { _ = "STUB: not implemented"; return nil }
 
 // An EncodeOption is an encoder option.
 type EncodeOption func(*Encoder)
 
 // EncodeOptionWithMaxDecimalDigits sets the maximum decimal digits to encode.
 func EncodeOptionWithMaxDecimalDigits(maxDecimalDigits int) EncodeOption {
-	return func(e *Encoder) {
-		e.maxDecimalDigits = maxDecimalDigits
-	}
+	_ = "STUB: not implemented"
+	return *new(EncodeOption)
 }
 
 // Marshal translates a geometry to the corresponding WKT.
 func Marshal(g geom.T, applyOptFns ...EncodeOption) (string, error) {
-	return NewEncoder(applyOptFns...).Encode(g)
+	_ = "STUB: not implemented"
+	return "", nil
 }
 
 // Unmarshal translates a WKT to the corresponding geometry.
-func Unmarshal(wkt string) (geom.T, error) {
-	wktlex := newWKTLex(wkt)
-	wktParse(wktlex)
-	if wktlex.lastErr != nil {
-		return nil, wktlex.lastErr
-	}
-	return wktlex.ret, nil
-}
+func Unmarshal(wkt string) (geom.T, error) { _ = "STUB: not implemented"; return *new(geom.T), nil }

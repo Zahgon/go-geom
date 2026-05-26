@@ -2,8 +2,6 @@ package wkb
 
 import (
 	"database/sql/driver"
-	"fmt"
-	"strings"
 
 	"github.com/twpayne/go-geom"
 	"github.com/twpayne/go-geom/encoding/wkbcommon"
@@ -14,9 +12,7 @@ type ErrExpectedByteSlice struct {
 	Value any
 }
 
-func (e ErrExpectedByteSlice) Error() string {
-	return fmt.Sprintf("wkb: want []byte, got %T", e.Value)
-}
+func (e ErrExpectedByteSlice) Error() string { _ = "STUB: not implemented"; return "" }
 
 // A Geom is a WKB-ecoded Geometry that implements the sql.Scanner and
 // driver.Value interfaces.
@@ -76,195 +72,92 @@ type GeometryCollection struct {
 }
 
 // Scan scans from a []byte.
-func (g *Geom) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	// NOTE(tb) other Scanners do not check the len of b, is it really useful ?
-	if len(b) == 0 {
-		return nil
-	}
-	var err error
-	g.T, err = Unmarshal(b, g.opts...)
-	return err
-}
+func (g *Geom) Scan(src any) error { _ = "STUB: not implemented"; return nil }
+
+// NOTE(tb) other Scanners do not check the len of b, is it really useful ?
 
 // Value returns the WKB encoding of g.
 func (g *Geom) Value() (driver.Value, error) {
-	return value(g.T)
+	_ = "STUB: not implemented"
+
+	// Geom returns the underlying geom.T.
+	return *new(driver.Value), nil
 }
 
-// Geom returns the underlying geom.T.
 func (g *Geom) Geom() geom.T {
-	return g.T
+	_ = "STUB: not implemented"
+
+	// Scan scans from a []byte.
+	return *new(geom.T)
 }
 
-// Scan scans from a []byte.
-func (p *Point) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, p.opts...)
-	if err != nil {
-		return err
-	}
-	p1, ok := got.(*geom.Point)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: p}
-	}
-	p.Point = p1
-	return nil
-}
+func (p *Point) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of p.
 func (p *Point) Value() (driver.Value, error) {
-	return value(p.Point)
+	_ = "STUB: not implemented"
+	return *
+
+	// Scan scans from a []byte.
+	new(driver.Value), nil
 }
 
-// Scan scans from a []byte.
-func (ls *LineString) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, ls.opts...)
-	if err != nil {
-		return err
-	}
-	ls1, ok := got.(*geom.LineString)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: ls}
-	}
-	ls.LineString = ls1
-	return nil
-}
+func (ls *LineString) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of ls.
 func (ls *LineString) Value() (driver.Value, error) {
-	return value(ls.LineString)
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 // Scan scans from a []byte.
-func (p *Polygon) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, p.opts...)
-	if err != nil {
-		return err
-	}
-	p1, ok := got.(*geom.Polygon)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: p}
-	}
-	p.Polygon = p1
-	return nil
-}
+func (p *Polygon) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of p.
 func (p *Polygon) Value() (driver.Value, error) {
-	return value(p.Polygon)
+	_ = "STUB: not implemented"
+	return *
+
+	// Scan scans from a []byte.
+	new(driver.Value), nil
 }
 
-// Scan scans from a []byte.
-func (mp *MultiPoint) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, mp.opts...)
-	if err != nil {
-		return err
-	}
-	mp1, ok := got.(*geom.MultiPoint)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: mp}
-	}
-	mp.MultiPoint = mp1
-	return nil
-}
+func (mp *MultiPoint) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of mp.
 func (mp *MultiPoint) Value() (driver.Value, error) {
-	return value(mp.MultiPoint)
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 // Scan scans from a []byte.
-func (mls *MultiLineString) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, mls.opts...)
-	if err != nil {
-		return err
-	}
-	mls1, ok := got.(*geom.MultiLineString)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: mls}
-	}
-	mls.MultiLineString = mls1
-	return nil
-}
+func (mls *MultiLineString) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of mls.
 func (mls *MultiLineString) Value() (driver.Value, error) {
-	return value(mls.MultiLineString)
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 // Scan scans from a []byte.
-func (mp *MultiPolygon) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, mp.opts...)
-	if err != nil {
-		return err
-	}
-	mp1, ok := got.(*geom.MultiPolygon)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: mp}
-	}
-	mp.MultiPolygon = mp1
-	return nil
-}
+func (mp *MultiPolygon) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of mp.
 func (mp *MultiPolygon) Value() (driver.Value, error) {
-	return value(mp.MultiPolygon)
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 // Scan scans from a []byte.
-func (gc *GeometryCollection) Scan(src any) error {
-	b, ok := src.([]byte)
-	if !ok {
-		return ErrExpectedByteSlice{Value: src}
-	}
-	got, err := Unmarshal(b, gc.opts...)
-	if err != nil {
-		return err
-	}
-	gc1, ok := got.(*geom.GeometryCollection)
-	if !ok {
-		return wkbcommon.ErrUnexpectedType{Got: got, Want: gc}
-	}
-	gc.GeometryCollection = gc1
-	return nil
-}
+func (gc *GeometryCollection) Scan(src any) error { _ = "STUB: not implemented"; return nil }
 
 // Value returns the WKB encoding of gc.
 func (gc *GeometryCollection) Value() (driver.Value, error) {
-	return value(gc.GeometryCollection)
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }
 
 func value(g geom.T) (driver.Value, error) {
-	sb := &strings.Builder{}
-	if err := Write(sb, NDR, g); err != nil {
-		return nil, err
-	}
-	return []byte(sb.String()), nil
+	_ = "STUB: not implemented"
+	return *new(driver.Value), nil
 }

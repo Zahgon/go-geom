@@ -3,32 +3,16 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 
 	"github.com/twpayne/go-geom/encoding/igc"
 )
 
-func parseIGC(filename string) (*igc.T, error) {
-	f, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer f.Close()
-	return igc.Read(f)
-}
+func parseIGC(filename string) (*igc.T, error) { _ = "STUB: not implemented"; return nil, nil }
 
 //nolint:unparam
-func run() error {
-	flag.Parse()
-	for _, arg := range flag.Args() {
-		if _, err := parseIGC(arg); err != nil {
-			fmt.Printf("%s: %v\n", arg, err)
-		}
-	}
-	return nil
-}
+func run() error { _ = "STUB: not implemented"; return nil }
 
 func main() {
 	if err := run(); err != nil {

@@ -17,12 +17,14 @@ const (
 var labels = [3]string{"NoIntersection", "PointIntersection", "CollinearIntersection"}
 
 func (t Type) String() string {
-	return labels[t]
+	_ = "STUB: not implemented"
+
+	// Result the results from LineIntersectsLine function.
+	// It contains the intersection point(s) and indicates what type of
+	// intersection there was (or if there was no intersection)
+	return ""
 }
 
-// Result the results from LineIntersectsLine function.
-// It contains the intersection point(s) and indicates what type of
-// intersection there was (or if there was no intersection)
 type Result struct {
 	intersectionType Type
 	intersection     []geom.Coord
@@ -30,26 +32,23 @@ type Result struct {
 
 // NewResult create a new result object
 func NewResult(intersectionType Type, intersection []geom.Coord) Result {
-	return Result{
-		intersectionType: intersectionType,
-		intersection:     intersection,
-	}
+	_ = "STUB: not implemented"
+	return *new(Result)
 }
 
 // HasIntersection returns true if the lines have an intersection
-func (i *Result) HasIntersection() bool {
-	return i.intersectionType != NoIntersection
-}
+func (i *Result) HasIntersection() bool { _ = "STUB: not implemented"; return false }
 
 // Type returns the type of intersection between the two lines
 func (i *Result) Type() Type {
-	return i.intersectionType
+	_ = "STUB: not implemented"
+	return *
+
+	// Intersection returns an array of Coords which are the intersection points.
+	// If the type is PointIntersection then there will only be a single Coordinate (the first coord).
+	// If the type is CollinearIntersection then there will two Coordinates the start and end points of the line
+	// that represents the intersection
+	new(Type)
 }
 
-// Intersection returns an array of Coords which are the intersection points.
-// If the type is PointIntersection then there will only be a single Coordinate (the first coord).
-// If the type is CollinearIntersection then there will two Coordinates the start and end points of the line
-// that represents the intersection
-func (i *Result) Intersection() []geom.Coord {
-	return i.intersection
-}
+func (i *Result) Intersection() []geom.Coord { _ = "STUB: not implemented"; return nil }
